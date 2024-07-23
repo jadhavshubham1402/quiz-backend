@@ -1,6 +1,6 @@
 // db.js
 const mongoose = require('mongoose');
-const mongoURI = 'mongodb://localhost:27017/yourdatabase'; // Replace with your MongoDB URI
+const mongoURI = 'mongodb+srv://Shubham4153:jwlPeUJlnTu5B2wB@cluster0.zqwaqvf.mongodb.net/quiz'; // Replace with your MongoDB URI
 
 mongoose.connect(mongoURI, {
   useNewUrlParser: true,
