@@ -1,17 +1,36 @@
-// db.js
-const mongoose = require('mongoose');
-const mongoURI = 'mongodb+srv://Shubham4153:jwlPeUJlnTu5B2wB@cluster0.zqwaqvf.mongodb.net/quiz'; // Replace with your MongoDB URI
+require("dotenv").config();
+const express = require("express");
+const app = express();
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const connectToDatabase = require("./database");
+const loginRoutes = require("./router/route");
 
-mongoose.connect(mongoURI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(cors());
+
+connectToDatabase.then(() => {
+  //health check routes
+  app.get("/", (req, res) => {
+    res.json({ message: "quiz backend is Running" });
+  });
+
+  app.use("/api/", loginRoutes);
+
+  //error handler
+  app.use(function (err, req, res, next) {
+    res.status(500);
+    res.send({
+      message: "something went wrong",
+      error: err?.message || err,
+      code: err.code,
+    });
+  });
+
+  app.listen(process.env.PORT, () => {
+    console.log(`Server is running at port ${process.env.PORT}`);
+  });
 });
 
-const db = mongoose.connection;
-
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-db.once('open', () => {
-  console.log('Connected to MongoDB');
-});
-
-module.exports = db;
+module.exports = app;
