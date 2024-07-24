@@ -16,6 +16,8 @@ app.use(
   })
 );
 
+app.use(express.json())
+
 connectToDatabase.then(() => {
   //health check routes
   app.get("/", (req, res) => {
