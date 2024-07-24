@@ -8,7 +8,11 @@ const loginRoutes = require("./router/route");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors({
+  origin:["https://quiz-frontend-seven-sigma.vercel.app"],
+  methods:["POST","GET"],
+  credentials:true
+}));
 
 connectToDatabase.then(() => {
   //health check routes
