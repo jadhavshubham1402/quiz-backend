@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(
   cors({
-    origin: ["https://quiz-frontend-seven-sigma.vercel.app"],
+    origin: ["https://quiz-frontend-seven-sigma.vercel.app/"],
     methods: ["POST", "GET"],
     credentials: true,
   })
