@@ -4,6 +4,7 @@ const topicSchema = new mongoose.Schema(
   {
     topic: {
       type: String,
+      enum:["javascript","java","python"]
     },
     question: {
       type: String,

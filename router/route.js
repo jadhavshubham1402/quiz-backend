@@ -13,7 +13,7 @@ const router = require("express").Router();
 
 router.post("/register", register);
 router.post("/login", loginUser);
-router.get("/getAllUser", authorize, getAllUserData);
+router.post("/getAllUser", authorize, getAllUserData);
 router.get("/getOneUser", authorize, getOneUserData);
 router.post("/updateScore", authorize, updateScore);
 router.post("/createTopic", authorize, createTopics);

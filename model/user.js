@@ -17,7 +17,11 @@ const userSchema = new mongoose.Schema(
         topic: String,
         score: Number
       }],
-      default: [],
+      default: [
+        {topic:"javascript",score:0},
+        {topic:"java",score:0},
+        {topic:"python",score:0}
+      ],
     },
 
   },

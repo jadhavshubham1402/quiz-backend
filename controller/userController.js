@@ -102,7 +102,9 @@ async function getOneUserData(req, res, next) {
 
 async function getAllUserData(req, res, next) {
   try {
-    const userData = await getAllUser();
+    const page = parseInt(req.body.page) || 1;
+    const limit = 10;
+    const userData = await getAllUser(page, limit);
     res.json({
       code: 200,
       data: userData,
@@ -115,28 +117,21 @@ async function getAllUserData(req, res, next) {
 async function updateScore(req, res, next) {
   try {
     let { topic, score } = req.body;
-    const filter = {
-      email: req.decoded.user.email,
-    //   "topicScore.topic": { $ne: topic },
-    };
-    const update = {
-      $addToSet: {
-        topicScore: { topic: topic, score: score },
-      },
-      $set: {
-        "topicScore.$[elem].score": score,
-      },
-    };
-    const options = {
-      arrayFilters: [{ "elem.topic": topic }],
-      new: true, 
-      upsert: true, 
-    };
+    console.log(req.decoded.user.email, topic)
 
-    const result = await updateUser(filter, update, options);
+    // const result = await getOneUser( { email: req.decoded.user.email,'topicScore.topic': topic})
+    const result = await updateUser(
+      { email: req.decoded.user.email,'topicScore.topic': topic},
+      { 
+        $set: { 'topicScore.$.score': score } // Update score
+      }
+    );
+
+    console.log(result, "result")
 
     if (result.nModified === 0) {
-      throw new Error("User not found or topic already updated");
+      // Handle if no document was updated (optional)
+      return res.status(404).json({ message: 'Document not found or score not updated' });
     }
 
     const updatedUser = await getOneUser({ email: req.decoded.user.email });
@@ -166,7 +161,8 @@ async function createTopics(req, res, next) {
 async function getAllTopics(req, res, next) {
   try {
     let { topic } = req.body;
-    const getTopics = await getAllTopic(topic);
+    console.log(topic, "topics")
+    const getTopics = await getAllTopic({ topic });
     res.json({
       code: 200,
       data: getTopics,
