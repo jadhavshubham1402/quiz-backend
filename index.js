@@ -8,7 +8,13 @@ const loginRoutes = require("./router/route");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors(
+  {
+    origin: '*', // or specific origins like 'http://localhost:3000'
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type'],
+  }
+));
 
 app.use(express.json())
 
