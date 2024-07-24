@@ -8,11 +8,13 @@ const loginRoutes = require("./router/route");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(
-  cors()
-);
+app.use(cors());
 
 app.use(express.json())
+
+app.get("/", (req, res) => {
+  res.json("quiz backend is Running");
+});
 
 connectToDatabase.then(() => {
   //health check routes
