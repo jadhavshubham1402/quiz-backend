@@ -40,8 +40,8 @@ connectToDatabase.then(() => {
     });
   });
 
-  app.listen(process.env.PORT, () => {
-    console.log(`Server is running at port ${process.env.PORT}`);
+  app.listen(5000, () => {
+    console.log(`Server is running at port 5000`);
   });
 });
 

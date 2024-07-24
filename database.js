@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const MONGO_URL = process.env.MONGO_URL || "";
+const MONGO_URL = "mongodb+srv://Shubham4153:jwlPeUJlnTu5B2wB@cluster0.zqwaqvf.mongodb.net/quiz";
 
 const connectToDatabase = new Promise((resolve, reject) => {
   mongoose

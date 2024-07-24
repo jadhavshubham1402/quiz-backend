@@ -27,7 +27,7 @@ async function loginUser(req, res, next) {
     let compareResult = await bcrypt.compare(password, user.password);
 
     if (compareResult) {
-      const token = jwt.sign({ user }, process.env.PRIVATE_KEY, {
+      const token = jwt.sign({ user }, "qwertyuiopasdfghjklzxcvbnm", {
         expiresIn: "1d",
         algorithm: "HS256",
       });

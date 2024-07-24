@@ -6,7 +6,7 @@ const authorize = async (req, res, next) => {
     console.log(token,"token")
     if (token) {
       // Function to verify token
-      jwt.verify(token, process.env.PRIVATE_KEY, (err, decoded) => {
+      jwt.verify(token, "qwertyuiopasdfghjklzxcvbnm", (err, decoded) => {
         if (err) {
             console.log(err)
           res.json({ success: false, message: "Token invalid" }); // Token has expired or is invalid
