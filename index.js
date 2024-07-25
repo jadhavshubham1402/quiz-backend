@@ -3,6 +3,8 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const https = require("https");
+const fs= require("fs")
 const connectToDatabase = require("./database");
 const loginRoutes = require("./router/route");
 
@@ -14,6 +16,15 @@ app.use(express.json())
 
 app.get("/", (req, res) => {
   res.json("quiz backend is Running");
+});
+
+const options = {
+  key: fs.readFileSync('ssl/self-signed/key.pem'),
+  cert: fs.readFileSync('ssl/self-signed/cert.pem')
+};
+
+https.createServer(options, app).listen(5001, () => {
+  console.log(`Server is running at 5001`);
 });
 
 connectToDatabase.then(() => {
