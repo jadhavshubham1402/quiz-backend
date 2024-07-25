@@ -23,8 +23,8 @@ const options = {
   cert: fs.readFileSync('ssl/self-signed/cert.pem')
 };
 
-https.createServer(options, app).listen(5001, () => {
-  console.log(`Server is running at 5001`);
+https.createServer(options, app).listen(8000, () => {
+  console.log(`Server is running at https 8000`);
 });
 
 connectToDatabase.then(() => {
