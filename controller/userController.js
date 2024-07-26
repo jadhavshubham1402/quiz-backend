@@ -47,7 +47,7 @@ async function loginUser(req, res, next) {
       });
     }
   } catch (error) {
-    res.status(500).send({ message: error.message });
+    res.status(404).send({ message: error.message });
   }
 }
 
@@ -76,8 +76,8 @@ async function register(req, res, next) {
       message: "User created",
     });
   } catch (error) {
-    console.log(error);
-    res.status(500).send({ message: error });
+    console.log(error.message);
+    res.status(404).send({ message: error.message });
   }
 }
 
@@ -96,7 +96,7 @@ async function getOneUserData(req, res, next) {
       data: userData,
     });
   } catch (error) {
-    res.status(500).send({ message: error });
+    res.status(404).send({ message: error.message });
   }
 }
 
@@ -110,7 +110,7 @@ async function getAllUserData(req, res, next) {
       data: userData,
     });
   } catch (error) {
-    res.status(500).send({ message: error });
+    res.status(404).send({ message: error.message });
   }
 }
 
@@ -141,7 +141,7 @@ async function updateScore(req, res, next) {
       message: "Score Updated",
     });
   } catch (error) {
-    res.status(500).send({ message: error });
+    res.status(404).send({ message: error.message });
   }
 }
 
@@ -154,7 +154,7 @@ async function createTopics(req, res, next) {
       message: "topic created",
     });
   } catch (error) {
-    res.status(500).send({ message: error });
+    res.status(404).send({ message: error.message });
   }
 }
 
@@ -168,7 +168,7 @@ async function getAllTopics(req, res, next) {
       data: getTopics,
     });
   } catch (error) {
-    res.status(500).send({ message: error });
+    res.status(404).send({ message: error.message });
   }
 }
 
